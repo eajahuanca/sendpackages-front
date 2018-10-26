@@ -3,7 +3,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import './App.css';
 import PageLogin from './views/LoginPage/PageLogin';
-import PageMain from './views/PageMain';
+import Dashboard from 'layouts/Dashboard/Dashboard';
+
 
 class App extends Component {
   render() {
@@ -11,7 +12,7 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route path="/login" component={PageLogin} />
-          <Route path="/" component={PageMain} />
+          <Route path="/" component={Dashboard} />
         </Switch>
       </BrowserRouter>
     );
