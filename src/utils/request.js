@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const API_SERVER = 'http://localhost:8000'
+export const API_SERVER = 'http://127.0.0.1:8000'
 
 function checkStatus(response){
     if(response.status >= 200 && response.status < 300){
@@ -13,6 +13,7 @@ function checkStatus(response){
 
 function renderErrors(response){
     if(response.response === undefined){
+        // eslint-disable-next-line
         throw{
             type: 'error',
             message: 'Error no controlado.'
