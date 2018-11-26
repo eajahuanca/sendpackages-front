@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const API_SERVER = 'http://localhost:8000'
+export const API_SERVER = 'http://127.0.0.1:8000'
 export const API_SERVER_SEGIP = 'https://'
 
 function checkStatus(response){
@@ -81,7 +81,7 @@ export function requestSegip(url, options = {method: 'get'}){
 
     return axios({
         url: url,
-        baseURL: API_SERVER,
+        baseURL: API_SERVER_SEGIP,
         ...options
     }).then(checkStatus).catch(renderErrors);
 }
