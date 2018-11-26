@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export const API_SERVER = 'http://localhost:8000'
+export const API_SERVER_SEGIP = 'https://'
 
 function checkStatus(response){
     if(response.status >= 200 && response.status < 300){
@@ -13,6 +14,7 @@ function checkStatus(response){
 
 function renderErrors(response){
     if(response.response === undefined){
+        // eslint-disable-next-line
         throw{
             type: 'error',
             message: 'Error no controlado.'
@@ -62,4 +64,35 @@ export function get(url){
         method: 'get'
     };
     return request(url, options);
+}
+
+/**
+ * @param {string} url 
+ * @param {object} options 
+ */
+export function requestSegip(url, options = {method: 'get'}){
+    options['Content-Type'] = 'application/json';
+    options['Accept'] = 'application/json';
+
+    const tkn = 'TOKEN_SEGIP';
+    if(tkn){
+        options['headers'] = { Authorization: `Token ${tkn}`};
+    }
+
+    return axios({
+        url: url,
+        baseURL: API_SERVER,
+        ...options
+    }).then(checkStatus).catch(renderErrors);
+}
+
+
+/**
+ * @param {string} url 
+ */
+export function getSegip(url){
+    const options = {
+        method: 'get'
+    };
+    return requestSegip(url, options);
 }

@@ -13,51 +13,50 @@ import headerLinksStyle from "assets/jss/material-dashboard-react/components/hea
 import AuthService from 'views/LoginPage/AuthService';
 
 class HeaderLinks extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-        user:{},
-        open: false,
-        value:0
+      user: {},
+      open: false,
+      value: 0
     };
-}
 
-  handleToggle = () => {
-    this.setState(state => ({ open: !state.open }));
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  handleLogout = () => {
+    localStorage.removeItem('tkn');
+    window.location.reload();
   };
 
-  handleClose = event => {
-    if (this.anchorEl.contains(event.target)) {
-      return;
-    }
-
-    this.setState({ open: false });
-  };
-
-  componentDidMount(){
+  componentDidMount() {
     AuthService.geInformationUser().then((user) => {
-        this.setState({ user })
-    }).catch(()=> {
-        this.props.history.push('/login');
+      this.setState({ user })
+    }).catch(() => {
+      this.props.history.push('/login');
     });
+  }
+
+  handleLogout = async event => {
+    localStorage.removeItem('tkn');
+    window.location.reload(); 
   }
 
   render() {
     const { classes } = this.props;
-    const { open } = this.state;
     const { value } = this.state;
     return (
-        <div>
-            <BottomNavigation
-                value={value}
-                onChange={this.handleChange}
-                showLabels
-                className={classes.root}
-            >
-                <BottomNavigationAction label="Buscar" icon={<Search/>}/>
-                <BottomNavigationAction label={this.state.user.username} icon={<Person />} />
-                <BottomNavigationAction label="Salir" icon={<Looks />} />
-            </BottomNavigation>
+      <div>
+        <BottomNavigation
+          value={value}
+          onChange={this.handleChange}
+          showLabels
+          className={classes.root}
+        >
+          <BottomNavigationAction label="Buscar" icon={<Search />} />
+          <BottomNavigationAction label={this.state.user.username} icon={<Person />} />
+          <BottomNavigationAction label="Salir" icon={<Looks />} onClick={this.handleLogout} />
+        </BottomNavigation>
       </div>
     );
   }

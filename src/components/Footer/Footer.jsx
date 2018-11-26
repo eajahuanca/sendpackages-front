@@ -15,7 +15,7 @@ function Footer({ ...props }) {
         <div className={classes.left}>
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
-              <a href="https://www.oopp.gob.bo" target="_blank" className={classes.block}>
+              <a href="https://www.oopp.gob.bo" className={classes.block}>
                 Ministerio de Obras Públicas, Servicios y Vivienda
               </a>
             </ListItem>
